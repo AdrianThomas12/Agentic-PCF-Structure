@@ -18,13 +18,12 @@ dataverse-gen.json
 *.suo
 *.user
 
+# Claude Code — local settings contain machine-specific paths; commands/ is committed
+.claude/settings.json
+.claude/settings.local.json
+
 # npm
 npm-debug.log*
-
-# macOS
-.DS_Store
-.AppleDouble
-.LSOverride
 
 # environment / secrets
 .env
