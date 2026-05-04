@@ -24,7 +24,7 @@ npx dataverse-gen      # Regenerate Dataverse model from dataverse-gen.json
 
 The control class is the PCF entry point. `init()` initialises service singletons with `context.webAPI`. `updateView()` is called on every context change and renders the React tree. `getOutputs()` returns the latest outputs set by the React component. Do not put business logic here — delegate to services and hooks.
 
-→ Full patterns: [docs/implementation-guide.md § 1 PCF Lifecycle](docs/implementation-guide.md#1-pcf-lifecycle)
+→ Full patterns: [README.md § 1 PCF Lifecycle](README.md#1-pcf-lifecycle)
 
 ### Model Layers
 
@@ -34,13 +34,13 @@ The control class is the PCF entry point. `init()` initialises service singleton
 
 Services must map Dataverse entities to app models before returning. All React code uses app models only.
 
-→ Full patterns: [docs/implementation-guide.md § 3 Model Layers & Mappings](docs/implementation-guide.md#3-model-layers--mappings)
+→ Full patterns: [README.md § 3 Model Layers & Mappings](README.md#3-model-layers--mappings)
 
 ### Services
 
 Extend `DataverseService` (which wraps `XrmContextDataverseClient` and sets the metadata cache). Use the singleton pattern with `static getInstance(webApi?)` — pass `webApi` only on the first call from `init()`. Use generated `*Attributes` constants for field names, not raw strings.
 
-→ Full reference (all `client.*` methods): [docs/implementation-guide.md § 2 Services](docs/implementation-guide.md#2-services)
+→ Full reference (all `client.*` methods): [README.md § 2 Services](README.md#2-services)
 
 ### Hooks
 
@@ -50,35 +50,35 @@ Extend `DataverseService` (which wraps `XrmContextDataverseClient` and sets the 
 
 New hooks for PCF integration belong in `PCFTemplate/hooks/`.
 
-→ Full reference (all return values): [docs/implementation-guide.md § 4 Hooks](docs/implementation-guide.md#4-hooks)
+→ Full reference (all return values): [README.md § 4 Hooks](README.md#4-hooks)
 
 ### Host Form Access (`utils/xrm.ts`)
 
 All functions in `utils/xrm.ts` access the parent model-driven app form via `Xrm.Page` and return `null`/no-op silently when running outside a model-driven app (test harness, canvas app). Use these helpers rather than accessing `Xrm` directly. The `@microsoft/power-apps/use-client-context` ESLint rule is suppressed only inside that file.
 
-→ Full reference (all 18 helpers): [docs/implementation-guide.md § 5 Utilities — xrm.ts](docs/implementation-guide.md#5-utilities--xrmts)
+→ Full reference (all 18 helpers): [README.md § 5 Utilities — xrm.ts](README.md#5-utilities--xrmts)
 
 ### Utilities
 
-- `utils/date.ts` — Dataverse date serialisation, display formatting, range helpers. → [§ 6](docs/implementation-guide.md#6-utilities--datets)
-- `utils/guid.ts` — GUID validation, normalisation, comparison. → [§ 7](docs/implementation-guide.md#7-utilities--guidts)
-- `utils/index.ts` — String helpers, `classNames`, re-exports all of the above. → [§ 8](docs/implementation-guide.md#8-utilities--indexts)
+- `utils/date.ts` — Dataverse date serialisation, display formatting, range helpers. → [§ 6](README.md#6-utilities--datets)
+- `utils/guid.ts` — GUID validation, normalisation, comparison. → [§ 7](README.md#7-utilities--guidts)
+- `utils/index.ts` — String helpers, `classNames`, re-exports all of the above. → [§ 8](README.md#8-utilities--indexts)
 
 ### Shared Types (`types/index.ts`)
 
-`Nullable<T>`, `SelectOption<T>`, `AsyncState<T>` — see [docs/implementation-guide.md § 9 Shared Types](docs/implementation-guide.md#9-shared-types)
+`Nullable<T>`, `SelectOption<T>`, `AsyncState<T>` — see [README.md § 9 Shared Types](README.md#9-shared-types)
 
 ### Localisation
 
 String resources live in `PCFTemplate/strings/PCFTemplate.1033.resx`. All keys are typed in `StringKeys` (`hooks/useLocalisation.ts`). Use `useLocalisation(context)` to get the `t(key)` function — never call `context.resources.getString()` directly. Add new keys to `StringKeys` and every `.resx` file together.
 
-→ Full reference: [docs/implementation-guide.md § 10 Localisation](docs/implementation-guide.md#10-localisation)
+→ Full reference: [README.md § 10 Localisation](README.md#10-localisation)
 
 ### CSS
 
 `PCFTemplate/css/PCFTemplate.css` is for animations (`@keyframes`), print styles, global resets, and third-party overrides. All component-level styling uses `makeStyles` with Fluent UI tokens. Apply `.pcf-template-root` to the outermost container element.
 
-→ Full reference (utility classes, when to use CSS vs makeStyles): [docs/implementation-guide.md § 11 CSS](docs/implementation-guide.md#11-css)
+→ Full reference (utility classes, when to use CSS vs makeStyles): [README.md § 11 CSS](README.md#11-css)
 
 ### Styling
 
