@@ -1,0 +1,15 @@
+{
+  "entities": [
+    "account",
+    "contact",
+    "opportunity"
+  ],
+  "actions": [],
+  "functions": [],
+  "generateIndex": true,
+  "generateFormContext": false,
+  "generateEntityTypes": true,
+  "output": {
+    "outputRoot": "./PCFTemplate/model/dataverse"
+  }
+}
